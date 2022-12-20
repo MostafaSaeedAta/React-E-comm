@@ -5,16 +5,21 @@ import {Home, CategoryProduct, ProductSingle, Cart, Search} from "./pages/index"
 import  Header  from "./components/Header/Header";
 import  SideBar from "./components/SideBar/SideBar";
 import  Footer  from "./components/Footer/Footer";
+import store from "./Store/store";
+import { Provider } from 'react-redux';
+
 
 function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
-        <Header />
-        <SideBar />
-        <Footer />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Header />
+          <SideBar />
+          <Footer />
+        </BrowserRouter>
+      </Provider>
     </div>
   )
 }

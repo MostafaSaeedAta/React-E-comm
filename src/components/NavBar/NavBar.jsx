@@ -29,6 +29,20 @@ const NavBar = () => {
               </Link>
             </div>
           </div>
+
+          <ul className='navbar-nav flex align-center fs-12 fw-4 font-manrope'>
+            <li className='nav-item no-wrap'>
+              <Link to='/' className='nav-link text-capitalize'>category here</Link>
+            </li>
+          </ul>
+        </div>
+
+
+        <div className='navbar-cart flex align-center'>
+          <Link to='/' className='cart-btn'>
+            <i className='fa-solid fa-cart-shopping'></i>
+            <div className='card-items-value'> 0 </div>
+          </Link>
         </div>
 
       </div>
