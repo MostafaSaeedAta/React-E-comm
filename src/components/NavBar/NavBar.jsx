@@ -37,11 +37,11 @@ const NavBar = () => {
             </div>
           </div>
 
-          <ul className='navbar-nav flex align-center fs-12 fw-4 font-manrope'>
+          <ul className='navbar-nav my-3 flex flex-row align-items-center justify-content-center fs-12 fw-4 font-manrope'>
            {
             categories.slice(0, 8).map((category, idx) => (
-            <li className='nav-item no-wrap' key={idx}>
-              <Link to={`category/${category}`} className='nav-link text-capitalize'>{category}</Link>
+            <li className='nav-item px-2 no-wrap' key={idx}>
+              <Link to={`category/${category}`} className='nav-link text-capitalize'>{category.replace("-" , " ")}</Link>
             </li>
            ))
            }
