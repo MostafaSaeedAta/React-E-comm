@@ -17,6 +17,17 @@ function App() {
         <BrowserRouter>
           <Header />
           <SideBar />
+
+          <Routes>
+
+            <Route path='/' element={ <Home /> } />
+            <Route path='/' element={ <CategoryProduct /> } />
+            <Route path='/' element={ <ProductSingle /> } />
+            <Route path='/' element={ <Cart /> } />
+            <Route path='/' element={ <Search /> } />
+
+          </Routes>
+
           <Footer />
         </BrowserRouter>
       </Provider>

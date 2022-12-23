@@ -26,7 +26,16 @@ const SideBar = () => {
           all category
         </div>
         <ul className='cat-list'>
-          <Link to='' className='cat-list-link text-capitalize'>category here</Link>
+        {
+          categories.map((category, idx) => {
+            return (
+              <li key={idx}>
+                <Link to={`category/${category}`} className='cat-list-link text-capitalize'>{category.replace('-', ' ')}</Link>
+
+              </li>
+            )
+          })
+        }
         </ul>
       </div>
     </aside>

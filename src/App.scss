@@ -77,7 +77,7 @@ input, textarea, select{
 
 /* flexbox and grid */
 .flex{
-    display: flex;
+    display: flex !important;
     &-column{ flex-direction: column;}
     &-wrap{flex-wrap: wrap;}
 }
