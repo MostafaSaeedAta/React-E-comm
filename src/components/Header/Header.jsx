@@ -64,11 +64,13 @@ const Header = () => {
               </ul>
           </div>
 
-          <div className='header-cnt-bottom'>
-            <Navbar />
-          </div>
-
         </div>
+
+        <div className='header-cnt-bottom'>
+          <Navbar />
+        </div>
+
+        
       </div>
 
     </header>

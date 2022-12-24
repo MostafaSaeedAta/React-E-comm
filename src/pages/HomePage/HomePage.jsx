@@ -18,8 +18,7 @@ const HomePage = () => {
   }, [])
 
   const products = useSelector(getAllProducts)
-  console.log(products);
-  const productStatus = useSelector(getAllProductsStatus)
+   const productStatus = useSelector(getAllProductsStatus)
 
   return (
     <main>
@@ -35,7 +34,7 @@ const HomePage = () => {
               <h3> see our products </h3>
             </div>
 
-            { productStatus === STATUS.LOADING ? <Loader /> : <ProductList /> }
+            { productStatus === STATUS.LOADING ? <Loader /> : <ProductList products={products} /> }
 
           </div>
         </div>
