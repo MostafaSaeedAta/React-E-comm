@@ -20,6 +20,20 @@ const HomePage = () => {
   const products = useSelector(getAllProducts)
    const productStatus = useSelector(getAllProductsStatus)
 
+  // randomize the products in the list
+  const tempProducts = []
+  if(products.length > 0) {
+    for(let i in products){
+      let randomIndex = Math.floor(Math.random() * products.length );
+      while (tempProducts.includes(products[randomIndex])) {
+         randomIndex = Math.floor(Math.random() * products.length );
+      };
+      tempProducts[i] = products[randomIndex];
+    }; 
+    
+  };
+
+
   return (
     <main>
       
@@ -34,7 +48,7 @@ const HomePage = () => {
               <h3> see our products </h3>
             </div>
 
-            { productStatus === STATUS.LOADING ? <Loader /> : <ProductList products={products} /> }
+            { productStatus === STATUS.LOADING ? <Loader /> : <ProductList products={tempProducts} /> }
 
           </div>
         </div>
