@@ -19,12 +19,14 @@ function App() {
           <SideBar />
 
           <Routes>
-
+            {/* for home page route */}
             <Route path='/' element={ <Home /> } />
-            <Route path='/' element={ <CategoryProduct /> } />
+            {/* for single product route */}
+            <Route path='/product/:id' element={ <ProductSingle  /> } />
+            {/* <Route path='/' element={ <CategoryProduct /> } />
             <Route path='/' element={ <ProductSingle /> } />
             <Route path='/' element={ <Cart /> } />
-            <Route path='/' element={ <Search /> } />
+            <Route path='/' element={ <Search /> } /> */}
 
           </Routes>
 
