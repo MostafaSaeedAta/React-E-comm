@@ -23,13 +23,14 @@ function App() {
             <Route path='/' element={ <Home /> } />
             {/* for single product route */}
             <Route path='/product/:id' element={ <ProductSingle  /> } />
-            {/* <Route path='/' element={ <CategoryProduct /> } />
-            <Route path='/' element={ <ProductSingle /> } />
-            <Route path='/' element={ <Cart /> } />
-            <Route path='/' element={ <Search /> } /> */}
+            {/* for category route */}
+            <Route path='/category/:category' element={ <CategoryProduct /> } />
+            {/* for Cart */}
+            <Route path='/cart' element={ <Cart /> } />
+            {/* for Search */}
+            <Route path='/search/:searchTerm' element={ <Search /> } />
 
           </Routes>
-
           <Footer />
         </BrowserRouter>
       </Provider>
