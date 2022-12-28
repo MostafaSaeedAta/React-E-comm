@@ -6,6 +6,7 @@ import { fetchAsyncProductSingle, getAllProductsStatus, getProductSingle, getSin
 import { STATUS } from '../../utils/status'
 import Loader from '../../components/Loader/Loader'
 import { formatPrice } from '../../utils/helpers'
+import { addToCart } from '../../Store/CartSlice'
 
 const ProductSinglePage = () => {
 
@@ -13,6 +14,8 @@ const ProductSinglePage = () => {
   const dispatch = useDispatch()
   const product = useSelector(getProductSingle)
   const productSingleStatus = useSelector(getSingleProductStatus)
+  const [quantity, setQuantity] = useState(1)
+
   
 
   // getting single product
@@ -23,6 +26,33 @@ const ProductSinglePage = () => {
   let discountedPrice = (product?.price) - (product?.price * (product?.discountPercentage / 100 ))
   if(productSingleStatus === STATUS.LOADING){
     return <Loader/>
+  }
+
+  const increaseQty = () => {
+    setQuantity((prevQty) => {
+      let tempQty = prevQty + 1 
+      if(tempQty > product?.stock){
+        tempQty = product?.stock
+      } 
+      return tempQty
+    })
+  }
+
+  const decreaseQty = () => {
+    setQuantity((prevQty) => {
+      let tempQty = prevQty - 1 
+      if( tempQty < 1){
+        tempQty = 1
+      } 
+      return tempQty
+    })
+  };
+
+  const addToCartHandler = (product) => {
+    let discountedPrice = (product?.price) - (product?.price) * (product?.discountPercentage / 100);
+    let totalPrice = quantity * discountedPrice;
+
+    dispatch(addToCart({ ... product , quantity : quantity, totalPrice,discountedPrice}))
   }
 
   return (
@@ -91,7 +121,42 @@ const ProductSinglePage = () => {
                     <div className='new-price fw-5 font-poppins fs-24 text-orange'>
                       {formatPrice(discountedPrice)}
                     </div>
+                    <div className='discount bg-orange fs-13 text-white fw-6 font-poppins'>
+                      {product?.discountPercentage} % off
+                    </div>
                   </div>
+                </div>
+
+                <div className='qty flex align-center my-4'>
+                  <div className='qty-text'> Quantity : </div>
+                  <div className='qty-change flex align-center justify-center'> 
+                    <button type='button' onClick={ ()=> decreaseQty()} className='qty-decrease flex align-center justify-center'>
+                      <i className='fas fa-minus'></i>
+                    </button>
+
+                    <div className='qty-value flex align-center justify-center'>
+                      { quantity }
+                    </div>
+
+                    <button type='button' onClick={ ()=> increaseQty()} className='qty-increase flex align-center justify-center'>
+                      <i className='fas fa-plus'></i>
+                    </button>
+                  </div>
+
+                  {
+                    (product?.stock === 0) ?  <div className='qty-error text-uppercase bg-danger '>out of stock</div> : <div className='mx-2 '> remaining <span className='text-danger'> { product?.stock } </span>  pieces</div> 
+                  }
+
+                </div>
+
+                <div className='btns'>
+                  <button type='button' className='add-to-cart-btn btn'>
+                    <i className='fas fa-shopping-cart'></i>
+                    <span className='btn-text mx-2' onClick={() => { addToCartHandler(product) }}> add to cart </span>
+                  </button>
+                  <button type='button' className='buy-now-btn btn mx-3'>
+                    <span className='btn-text'> buy now </span>
+                  </button>
                 </div>
 
               </div>
