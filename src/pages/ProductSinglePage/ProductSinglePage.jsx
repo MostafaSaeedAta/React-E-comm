@@ -6,22 +6,30 @@ import { fetchAsyncProductSingle, getAllProductsStatus, getProductSingle, getSin
 import { STATUS } from '../../utils/status'
 import Loader from '../../components/Loader/Loader'
 import { formatPrice } from '../../utils/helpers'
-import { addToCart } from '../../Store/CartSlice'
+import { addToCart ,getCartMessageStatus,setCartMessageOff , setCartMessageOn } from '../../Store/CartSlice'
+import CartMessage from '../../components/CartMessage/CartMessage'
 
 const ProductSinglePage = () => {
 
   const {id} = useParams();
-  const dispatch = useDispatch()
-  const product = useSelector(getProductSingle)
-  const productSingleStatus = useSelector(getSingleProductStatus)
-  const [quantity, setQuantity] = useState(1)
+  const dispatch = useDispatch();
+  const product = useSelector(getProductSingle);
+  const productSingleStatus = useSelector(getSingleProductStatus);
+  const [quantity, setQuantity] = useState(1);
+  const CartMessageStatus = useSelector(getCartMessageStatus);
 
   
 
   // getting single product
   useEffect (() => {
-    dispatch(fetchAsyncProductSingle(id))
-  }, [])
+    dispatch(fetchAsyncProductSingle(id));
+
+    if(CartMessageStatus) {
+      setTimeout( ()=> {
+        dispatch(setCartMessageOff());
+      },2000 );
+    }
+  }, [CartMessageStatus])
 
   let discountedPrice = (product?.price) - (product?.price * (product?.discountPercentage / 100 ))
   if(productSingleStatus === STATUS.LOADING){
@@ -52,7 +60,8 @@ const ProductSinglePage = () => {
     let discountedPrice = (product?.price) - (product?.price) * (product?.discountPercentage / 100);
     let totalPrice = quantity * discountedPrice;
 
-    dispatch(addToCart({ ... product , quantity : quantity, totalPrice,discountedPrice}))
+    dispatch(addToCart({ ... product , quantity : quantity, totalPrice,discountedPrice}));
+    dispatch(setCartMessageOn(true));
   }
 
   return (
@@ -164,6 +173,8 @@ const ProductSinglePage = () => {
           </div>
         </div>
       </div>
+
+      {CartMessageStatus  && <CartMessage />} 
     </main>
   )
 }
