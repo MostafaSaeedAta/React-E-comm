@@ -56,7 +56,7 @@ const Header = () => {
                 </li>
                 <li className='vert-line'></li>
                 <li>
-                  <Link to = "/">
+                  <Link to = "/Login">
                     <span className='top-link-itm-txt'>Log in</span>
                   </Link>
                 </li>

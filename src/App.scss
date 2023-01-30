@@ -32,6 +32,11 @@ body{
   line-height: 1.6;
   font-family: $font-family-poppins;
   color: $clr-black;
+  min-height: 100vh;
+}
+
+#root {
+  height: 100%;
 }
 ul{
   list-style-type: none;

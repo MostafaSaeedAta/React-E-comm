@@ -7,6 +7,7 @@ import  SideBar from "./components/SideBar/SideBar";
 import  Footer  from "./components/Footer/Footer";
 import store from "./Store/store";
 import { Provider } from 'react-redux';
+import Login from './pages/Auth/Login';
 
 
 function App() {
@@ -29,6 +30,8 @@ function App() {
             <Route path='/cart' element={ <Cart /> } />
             {/* for Search */}
             <Route path='/search/:searchTerm' element={ <Search /> } />
+            {/* for login */}
+            <Route path='/Login' element={  <Login/> } />
 
           </Routes>
           <Footer />
